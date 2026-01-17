@@ -35,10 +35,18 @@ export const useTodos = () => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  const skipTodo = (id: string) => {
+    const todoToSkip = todos.find(t => t.id === id);
+    if (!todoToSkip) return;
+    const others = todos.filter(t => t.id !== id);
+    setTodos([...others, todoToSkip]);
+  };
+
   return {
     todos,
     addTodo,
     updateTodoStatus,
     deleteTodo,
+    skipTodo,
   };
 };

@@ -4,16 +4,20 @@ import SwipeCard from '../components/SwipeCard';
 interface HomePageProps {
   todos: Todo[];
   updateTodoStatus: (id: string, status: TodoStatus) => void;
+  skipTodo: (id: string) => void;
 }
 
-const HomePage = ({ todos, updateTodoStatus }: HomePageProps) => {
+const HomePage = ({ todos, updateTodoStatus, skipTodo }: HomePageProps) => {
   const pendingTodos = todos.filter(t => t.status === 'pending');
   const currentTodo = pendingTodos[0];
   const stackedTodos = pendingTodos.slice(1, 4);
   const remainingCount = pendingTodos.length;
 
-  const handleSwipe = (status: TodoStatus) => {
-    if (currentTodo) {
+  const handleSwipe = (status: TodoStatus | 'skip') => {
+    if (!currentTodo) return;
+    if (status === 'skip') {
+      skipTodo(currentTodo.id);
+    } else {
       updateTodoStatus(currentTodo.id, status);
     }
   };
@@ -37,8 +41,8 @@ const HomePage = ({ todos, updateTodoStatus }: HomePageProps) => {
                 key={todo.id}
                 className={`background-card priority-${todo.priority}`}
                 style={{
-                  transform: `scale(${0.94 - index * 0.03}) translateY(${(index + 1) * 8}px)`,
-                  opacity: 0.7 - index * 0.15,
+                  transform: `scale(${0.92 - index * 0.03}) translate(${(index + 1) * 6}px, ${(index + 1) * 6}px)`,
+                  opacity: 0.8 - index * 0.15,
                   zIndex: 3 - index,
                 }}
               />
@@ -54,7 +58,7 @@ const HomePage = ({ todos, updateTodoStatus }: HomePageProps) => {
 
       <div className="swipe-guide">
         <div className="guide-item">
-          <span>← 未実施</span>
+          <span>← スキップ</span>
         </div>
         <div className="guide-item">
           <span>↑ 完了</span>

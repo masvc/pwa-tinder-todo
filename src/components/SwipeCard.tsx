@@ -3,7 +3,7 @@ import { Todo, TodoStatus } from '../types';
 
 interface SwipeCardProps {
   todo: Todo;
-  onSwipe: (status: TodoStatus) => void;
+  onSwipe: (status: TodoStatus | 'skip') => void;
 }
 
 const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
@@ -25,7 +25,7 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
       if (absX > absY) {
         // 左右のスワイプ
         if (info.offset.x < 0) {
-          onSwipe('pending'); // 左: 未実施
+          onSwipe('skip'); // 左: スキップ
         } else {
           onSwipe('inProgress'); // 右: 進行中
         }
@@ -68,7 +68,7 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
       {todo.description && <p>{todo.description}</p>}
 
       <div className="swipe-hints">
-        <span className="hint hint-left">未実施</span>
+        <span className="hint hint-left">スキップ</span>
         <span className="hint hint-up">完了</span>
         <span className="hint hint-right">進行中</span>
         <span className="hint hint-down">アーカイブ</span>

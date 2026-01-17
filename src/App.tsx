@@ -8,19 +8,19 @@ import './App.css';
 type Page = 'home' | 'list' | 'add';
 
 function App() {
-  const { todos, addTodo, updateTodoStatus } = useTodos();
+  const { todos, addTodo, updateTodoStatus, skipTodo } = useTodos();
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage todos={todos} updateTodoStatus={updateTodoStatus} />;
+        return <HomePage todos={todos} updateTodoStatus={updateTodoStatus} skipTodo={skipTodo} />;
       case 'list':
         return <TodoListPage todos={todos} updateTodoStatus={updateTodoStatus} />;
       case 'add':
         return <AddTodoPage onAdd={addTodo} onComplete={() => setCurrentPage('home')} />;
       default:
-        return <HomePage todos={todos} updateTodoStatus={updateTodoStatus} />;
+        return <HomePage todos={todos} updateTodoStatus={updateTodoStatus} skipTodo={skipTodo} />;
     }
   };
 
