@@ -612,6 +612,36 @@ body {
   margin-top: 8px;
 }
 
+.settings-section {
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.settings-timestamp {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.save-btn-small {
+  padding: 10px 16px;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.save-btn-small:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
 /* Mode Tabs */
 .mode-tabs {
   display: flex;

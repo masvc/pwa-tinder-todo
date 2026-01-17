@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react';
 
 export interface Settings {
   notionDbUrl: string;
+  notionUpdatedAt: number | null;
   claudeApiKey: string;
-  updatedAt: number | null;
+  claudeUpdatedAt: number | null;
 }
 
 const STORAGE_KEY = 'swipe-todo-settings';
 
 const defaultSettings: Settings = {
   notionDbUrl: '',
+  notionUpdatedAt: null,
   claudeApiKey: '',
-  updatedAt: null,
+  claudeUpdatedAt: null,
 };
 
 export const useSettings = () => {
@@ -24,12 +26,19 @@ export const useSettings = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
   }, [settings]);
 
-  const updateSettings = (newSettings: Partial<Settings>) => {
-    setSettings({
-      ...settings,
-      ...newSettings,
-      updatedAt: Date.now(),
-    });
+  const updateSettings = (updates: { notionDbUrl?: string; claudeApiKey?: string }) => {
+    const now = Date.now();
+    setSettings((prev) => ({
+      ...prev,
+      ...(updates.notionDbUrl !== undefined && {
+        notionDbUrl: updates.notionDbUrl,
+        notionUpdatedAt: now,
+      }),
+      ...(updates.claudeApiKey !== undefined && {
+        claudeApiKey: updates.claudeApiKey,
+        claudeUpdatedAt: now,
+      }),
+    }));
   };
 
   const hasApiKey = settings.claudeApiKey.length > 0;
