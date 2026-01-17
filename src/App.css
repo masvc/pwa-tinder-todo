@@ -355,3 +355,66 @@ body {
 .submit-btn:hover {
   background: #0f0f1a;
 }
+
+/* Priority Colors */
+.priority-high { --priority-color: #ef4444; }
+.priority-medium { --priority-color: #f59e0b; }
+.priority-low { --priority-color: #22c55e; }
+
+/* Priority Badge */
+.priority-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  background: var(--priority-color);
+}
+
+/* Priority Card Border */
+.swipe-card.priority-high { border-color: #ef4444; }
+.swipe-card.priority-medium { border-color: #f59e0b; }
+.swipe-card.priority-low { border-color: #22c55e; }
+
+/* Background Card Priority */
+.background-card.priority-high { border-color: #fca5a5; background: #fef2f2; }
+.background-card.priority-medium { border-color: #fcd34d; background: #fffbeb; }
+.background-card.priority-low { border-color: #86efac; background: #f0fdf4; }
+
+/* Priority Buttons */
+.priority-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.priority-btn {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.priority-btn.priority-high { color: #ef4444; border-color: #fecaca; }
+.priority-btn.priority-medium { color: #f59e0b; border-color: #fde68a; }
+.priority-btn.priority-low { color: #22c55e; border-color: #bbf7d0; }
+
+.priority-btn.priority-high.active { background: #ef4444; color: white; border-color: #ef4444; }
+.priority-btn.priority-medium.active { background: #f59e0b; color: white; border-color: #f59e0b; }
+.priority-btn.priority-low.active { background: #22c55e; color: white; border-color: #22c55e; }
+
+/* Todo List Priority Indicator */
+.todo-item {
+  border-left: 4px solid transparent;
+}
+
+.todo-item.priority-high { border-left-color: #ef4444; }
+.todo-item.priority-medium { border-left-color: #f59e0b; }
+.todo-item.priority-low { border-left-color: #22c55e; }

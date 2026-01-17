@@ -40,6 +40,12 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
     }
   };
 
+  const priorityLabel = {
+    high: '高',
+    medium: '中',
+    low: '低',
+  };
+
   return (
     <motion.div
       style={{
@@ -53,11 +59,14 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={1}
       onDragEnd={handleDragEnd}
-      className="swipe-card"
+      className={`swipe-card priority-${todo.priority}`}
     >
+      <span className={`priority-badge priority-${todo.priority}`}>
+        {priorityLabel[todo.priority]}
+      </span>
       <h3>{todo.title}</h3>
       {todo.description && <p>{todo.description}</p>}
-      
+
       <div className="swipe-hints">
         <span className="hint hint-left">未実施</span>
         <span className="hint hint-up">完了</span>

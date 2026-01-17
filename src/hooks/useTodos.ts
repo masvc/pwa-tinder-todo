@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Todo, TodoStatus } from '../types';
+import { Todo, TodoStatus, Priority } from '../types';
 
 const STORAGE_KEY = 'swipe-todos';
 
@@ -13,12 +13,13 @@ export const useTodos = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (title: string, description?: string) => {
+  const addTodo = (title: string, description?: string, priority: Priority = 'medium') => {
     const newTodo: Todo = {
       id: Date.now().toString(),
       title,
       description,
       status: 'pending',
+      priority,
       createdAt: Date.now(),
     };
     setTodos([newTodo, ...todos]);

@@ -57,7 +57,7 @@ const TodoListPage = ({ todos, updateTodoStatus }: TodoListPageProps) => {
           <div className="empty-message">タスクがありません</div>
         ) : (
           filteredTodos.map(todo => (
-            <div key={todo.id} className="todo-item">
+            <div key={todo.id} className={`todo-item priority-${todo.priority}`}>
               <div className="todo-content">
                 <h3>{todo.title}</h3>
                 {todo.description && <p>{todo.description}</p>}

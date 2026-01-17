@@ -1,20 +1,23 @@
 import { useState, FormEvent } from 'react';
+import { Priority } from '../types';
 
 interface AddTodoPageProps {
-  onAdd: (title: string, description?: string) => void;
+  onAdd: (title: string, description?: string, priority?: Priority) => void;
   onComplete: () => void;
 }
 
 const AddTodoPage = ({ onAdd, onComplete }: AddTodoPageProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState<Priority>('medium');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      onAdd(title, description || undefined);
+      onAdd(title, description || undefined, priority);
       setTitle('');
       setDescription('');
+      setPriority('medium');
       onComplete();
     }
   };
@@ -36,6 +39,33 @@ const AddTodoPage = ({ onAdd, onComplete }: AddTodoPageProps) => {
             required
             autoFocus
           />
+        </div>
+
+        <div className="form-group">
+          <label>優先度</label>
+          <div className="priority-buttons">
+            <button
+              type="button"
+              className={`priority-btn priority-high ${priority === 'high' ? 'active' : ''}`}
+              onClick={() => setPriority('high')}
+            >
+              高
+            </button>
+            <button
+              type="button"
+              className={`priority-btn priority-medium ${priority === 'medium' ? 'active' : ''}`}
+              onClick={() => setPriority('medium')}
+            >
+              中
+            </button>
+            <button
+              type="button"
+              className={`priority-btn priority-low ${priority === 'low' ? 'active' : ''}`}
+              onClick={() => setPriority('low')}
+            >
+              低
+            </button>
+          </div>
         </div>
 
         <div className="form-group">
