@@ -115,12 +115,15 @@ body {
 
 .background-card {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: white;
   border-radius: 16px;
-  border: 1px solid #e5e7eb;
+  border: 2px solid #d1d5db;
   pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .swipe-card {
@@ -213,6 +216,8 @@ body {
 .list-page {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 80px);
+  height: calc(100dvh - 80px);
 }
 
 .status-tabs {
@@ -243,10 +248,13 @@ body {
 }
 
 .todo-list {
-  padding: 16px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1px;
+  background: #e5e7eb;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .todo-item {
@@ -254,9 +262,7 @@ body {
   align-items: center;
   gap: 12px;
   background: white;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
 }
 
 .todo-content {
@@ -265,28 +271,29 @@ body {
 }
 
 .todo-content h3 {
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: #1a1a2e;
-  margin-bottom: 4px;
 }
 
 .todo-content p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #6b7280;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 2px;
 }
 
 .status-select {
-  padding: 6px 10px;
+  padding: 4px 8px;
   border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 4px;
+  font-size: 11px;
   background: white;
   color: #374151;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .empty-message {
@@ -412,9 +419,7 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.priority-range.priority-high { background: linear-gradient(to right, #ef4444, #fca5a5); }
-.priority-range.priority-medium { background: linear-gradient(to right, #ef4444, #f59e0b, #22c55e); }
-.priority-range.priority-low { background: linear-gradient(to right, #86efac, #22c55e); }
+.priority-range { background: linear-gradient(to right, #22c55e, #f59e0b, #ef4444); }
 
 .priority-range.priority-high::-webkit-slider-thumb { background: #ef4444; }
 .priority-range.priority-medium::-webkit-slider-thumb { background: #f59e0b; }
@@ -431,9 +436,9 @@ body {
   font-weight: 600;
 }
 
-.priority-labels span:first-child.active { color: #ef4444; }
+.priority-labels span:first-child.active { color: #22c55e; }
 .priority-labels span:nth-child(2).active { color: #f59e0b; }
-.priority-labels span:last-child.active { color: #22c55e; }
+.priority-labels span:last-child.active { color: #ef4444; }
 
 /* Refresh Button */
 .refresh-btn {

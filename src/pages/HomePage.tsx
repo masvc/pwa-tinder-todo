@@ -49,9 +49,8 @@ const HomePage = ({ todos, updateTodoStatus, skipTodo, refreshTodos }: HomePageP
                 key={todo.id}
                 className={`background-card priority-${todo.priority}`}
                 style={{
-                  transform: `scale(${0.92 - index * 0.03}) translate(${(index + 1) * 6}px, ${(index + 1) * 6}px)`,
-                  opacity: 0.8 - index * 0.15,
-                  zIndex: 3 - index,
+                  transform: `translate(${(index + 1) * -8}px, ${(index + 1) * -8}px)`,
+                  zIndex: -index - 1,
                 }}
               />
             ))}

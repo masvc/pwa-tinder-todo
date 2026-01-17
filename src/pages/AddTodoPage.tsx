@@ -48,17 +48,17 @@ const AddTodoPage = ({ onAdd, onComplete }: AddTodoPageProps) => {
               type="range"
               min="0"
               max="2"
-              value={priority === 'high' ? 0 : priority === 'medium' ? 1 : 2}
+              value={priority === 'low' ? 0 : priority === 'medium' ? 1 : 2}
               onChange={(e) => {
                 const val = parseInt(e.target.value);
-                setPriority(val === 0 ? 'high' : val === 1 ? 'medium' : 'low');
+                setPriority(val === 0 ? 'low' : val === 1 ? 'medium' : 'high');
               }}
               className={`priority-range priority-${priority}`}
             />
             <div className="priority-labels">
-              <span className={priority === 'high' ? 'active' : ''}>高</span>
-              <span className={priority === 'medium' ? 'active' : ''}>中</span>
               <span className={priority === 'low' ? 'active' : ''}>低</span>
+              <span className={priority === 'medium' ? 'active' : ''}>中</span>
+              <span className={priority === 'high' ? 'active' : ''}>高</span>
             </div>
           </div>
         </div>
