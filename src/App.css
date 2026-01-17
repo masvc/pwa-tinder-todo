@@ -131,7 +131,7 @@ body {
   height: 100%;
   background: white;
   border-radius: 12px;
-  border: 3px solid;
+  border: 2px solid #d1d5db;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -410,15 +410,6 @@ body {
   background: var(--priority-color);
 }
 
-/* Priority Card Border */
-.swipe-card.priority-high { border-color: #ef4444; }
-.swipe-card.priority-medium { border-color: #f59e0b; }
-.swipe-card.priority-low { border-color: #22c55e; }
-
-/* Background Card Priority */
-.background-card.priority-high { border-color: #fca5a5; background: #fef2f2; }
-.background-card.priority-medium { border-color: #fcd34d; background: #fffbeb; }
-.background-card.priority-low { border-color: #86efac; background: #f0fdf4; }
 
 /* Priority Slider */
 .priority-slider {
