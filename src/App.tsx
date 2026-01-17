@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useTodos } from './hooks/useTodos';
+import { useSettings } from './hooks/useSettings';
 import HomePage from './pages/HomePage';
 import TodoListPage from './pages/TodoListPage';
 import AddTodoPage from './pages/AddTodoPage';
+import SettingsPage from './pages/SettingsPage';
 import './App.css';
 
-type Page = 'home' | 'list' | 'add';
+type Page = 'home' | 'list' | 'add' | 'settings';
 
 function App() {
   const { todos, addTodo, updateTodoStatus, skipTodo, refreshTodos } = useTodos();
+  const { settings, updateSettings, hasApiKey } = useSettings();
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
   const renderPage = () => {
@@ -18,7 +21,9 @@ function App() {
       case 'list':
         return <TodoListPage todos={todos} updateTodoStatus={updateTodoStatus} />;
       case 'add':
-        return <AddTodoPage onAdd={addTodo} onComplete={() => setCurrentPage('home')} />;
+        return <AddTodoPage onAdd={addTodo} onComplete={() => setCurrentPage('home')} apiKey={settings.claudeApiKey} hasApiKey={hasApiKey} />;
+      case 'settings':
+        return <SettingsPage settings={settings} updateSettings={updateSettings} />;
       default:
         return <HomePage todos={todos} updateTodoStatus={updateTodoStatus} skipTodo={skipTodo} refreshTodos={refreshTodos} />;
     }
@@ -35,22 +40,29 @@ function App() {
           className={currentPage === 'list' ? 'active' : ''}
           onClick={() => setCurrentPage('list')}
         >
-          <span className="nav-icon">list</span>
+          <span className="nav-icon">☰</span>
           <span className="nav-label">一覧</span>
         </button>
         <button
           className={currentPage === 'home' ? 'active' : ''}
           onClick={() => setCurrentPage('home')}
         >
-          <span className="nav-icon">home</span>
+          <span className="nav-icon">◉</span>
           <span className="nav-label">ホーム</span>
         </button>
         <button
           className={currentPage === 'add' ? 'active' : ''}
           onClick={() => setCurrentPage('add')}
         >
-          <span className="nav-icon">add</span>
+          <span className="nav-icon">+</span>
           <span className="nav-label">追加</span>
+        </button>
+        <button
+          className={currentPage === 'settings' ? 'active' : ''}
+          onClick={() => setCurrentPage('settings')}
+        >
+          <span className="nav-icon">⚙</span>
+          <span className="nav-label">設定</span>
         </button>
       </nav>
     </div>
