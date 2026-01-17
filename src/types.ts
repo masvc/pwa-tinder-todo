@@ -10,7 +10,3 @@ export interface Todo {
   createdAt: number;
 }
 
-export interface SwipeDirection {
-  x: number;
-  y: number;
-}

@@ -11,6 +11,18 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // URLまたはowner/repo形式からowner/repoを抽出
+  const parseRepo = (input: string): string => {
+    const trimmed = input.trim();
+    // https://github.com/owner/repo 形式
+    const urlMatch = trimmed.match(/github\.com\/([^/]+\/[^/]+)/);
+    if (urlMatch) {
+      return urlMatch[1].replace(/\.git$/, '');
+    }
+    // owner/repo 形式
+    return trimmed;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token || !repo) return;
@@ -18,7 +30,8 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
     setLoading(true);
     setError('');
 
-    const success = await onLogin(token, repo, claudeKey || undefined);
+    const parsedRepo = parseRepo(repo);
+    const success = await onLogin(token, parsedRepo, claudeKey || undefined);
 
     if (!success) {
       setError('認証に失敗しました。トークンとリポジトリを確認してください。');
@@ -49,7 +62,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
             <label>リポジトリ *</label>
             <input
               type="text"
-              placeholder="username/my-tasks"
+              placeholder="https://github.com/username/repo"
               value={repo}
               onChange={(e) => setRepo(e.target.value)}
               required

@@ -1,13 +1,22 @@
 # Swipe Todo
 
-Tinder風スワイプUIのタスク管理アプリ（GitHub Issues連携）
+Tinder風スワイプUIのタスク管理PWAアプリ
+
+**デモ**: https://pwa-tinder-todo.vercel.app
+
+## 特徴
+
+- Tinder風のスワイプUIでタスク管理
+- GitHub Issuesをバックエンドとして使用
+- AIタスク生成（Claude API、任意）
+- PWA対応（オフライン・ホーム画面追加可）
 
 ## スワイプ操作
 
 | 方向 | アクション |
 |------|-----------|
-| ← | スキップ |
-| → | 進行中 |
+| ← | スキップ（後回し） |
+| → | 進行中に変更 |
 | ↑ | 完了 |
 | ↓ | アーカイブ |
 
@@ -27,15 +36,17 @@ Tinder風スワイプUIのタスク管理アプリ（GitHub Issues連携）
 
 ### 3. アプリにログイン
 
-- PATとリポジトリ名（`username/repo`形式）を入力
+- PATとリポジトリURL（`https://github.com/username/repo`）を入力
+- Claude API Key（任意）：AI生成機能を使う場合
 
-> **注意**: トークンはsessionStorageに保存されます。タブを閉じると消えます。
+> **注意**: 認証情報はsessionStorageに保存されます。タブを閉じると消えます。
 
-## 機能
+## 技術スタック
 
-- GitHub Issuesでタスク管理
-- 優先度設定（高/中/低）→ ラベルで管理
-- PWA対応
+- React + TypeScript + Vite
+- framer-motion（スワイプアニメーション）
+- GitHub Issues API
+- Vercel（ホスティング）
 
 ## 開発
 
