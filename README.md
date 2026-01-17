@@ -4,19 +4,27 @@ Tinder風スワイプUIのタスク管理PWAアプリ
 
 **デモ**: https://pwa-tinder-todo.vercel.app
 
+## スクリーンショット
+
+<p align="center">
+  <img src="docs/home.png" width="200" alt="ホーム">
+  <img src="docs/list.png" width="200" alt="一覧">
+  <img src="docs/add.png" width="200" alt="追加">
+</p>
+
 ## 特徴
 
-- Tinder風のスワイプUIでタスク管理
-- GitHub Issuesをバックエンドとして使用
-- AIタスク生成（Claude API、任意）
-- PWA対応（オフライン・ホーム画面追加可）
+- **スワイプでタスク管理** - Tinder風UIで直感的に操作
+- **GitHub Issues連携** - タスクはGitHub Issuesに保存
+- **AI生成** - Claude APIでタスクを自動生成（任意）
+- **PWA対応** - ホーム画面に追加可能
 
 ## スワイプ操作
 
 | 方向 | アクション |
-|------|-----------|
+|:----:|-----------|
 | ← | スキップ（後回し） |
-| → | 進行中に変更 |
+| → | 進行中 |
 | ↑ | 完了 |
 | ↓ | アーカイブ |
 
@@ -30,23 +38,21 @@ Tinder風スワイプUIのタスク管理PWAアプリ
 
 1. GitHub → Settings → Developer settings
 2. Personal access tokens → Tokens (classic)
-3. Generate new token (classic)
-4. 「repo」スコープにチェック
-5. トークンを生成してコピー
+3. Generate new token → 「repo」スコープにチェック
 
-### 3. アプリにログイン
+### 3. ログイン
 
-- PATとリポジトリURL（`https://github.com/username/repo`）を入力
-- Claude API Key（任意）：AI生成機能を使う場合
+<img src="docs/login.png" width="300" alt="ログイン画面">
 
-> **注意**: 認証情報はsessionStorageに保存されます。タブを閉じると消えます。
+- **GitHub PAT**: 発行したトークン
+- **リポジトリ**: `https://github.com/username/repo` 形式でOK
+- **Claude API Key**: AI生成を使う場合のみ（任意）
+
+> 認証情報はsessionStorageに保存されます。タブを閉じると消えます。
 
 ## 技術スタック
 
-- React + TypeScript + Vite
-- framer-motion（スワイプアニメーション）
-- GitHub Issues API
-- Vercel（ホスティング）
+React / TypeScript / Vite / framer-motion / GitHub Issues API / Vercel
 
 ## 開発
 
