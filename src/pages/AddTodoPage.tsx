@@ -50,7 +50,7 @@ const AddTodoPage = ({ onAdd, onComplete, claudeKey, hasClaudeKey }: AddTodoPage
           'anthropic-dangerous-direct-browser-access': 'true',
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-3-5-sonnet-20241022',
           max_tokens: 1024,
           messages: [
             {
@@ -64,7 +64,8 @@ const AddTodoPage = ({ onAdd, onComplete, claudeKey, hasClaudeKey }: AddTodoPage
       });
 
       if (!response.ok) {
-        throw new Error('API error');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error?.message || `API error: ${response.status}`);
       }
 
       const data = await response.json();
@@ -75,10 +76,10 @@ const AddTodoPage = ({ onAdd, onComplete, claudeKey, hasClaudeKey }: AddTodoPage
         const tasks = JSON.parse(jsonMatch[0]) as GeneratedTask[];
         setGeneratedTasks(tasks);
       } else {
-        throw new Error('Parse error');
+        throw new Error('JSONのパースに失敗');
       }
-    } catch {
-      setError('生成に失敗しました');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '生成に失敗しました');
     } finally {
       setIsGenerating(false);
     }
