@@ -951,3 +951,125 @@ body {
   cursor: pointer;
   margin-bottom: 16px;
 }
+
+/* Login Page */
+.login-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+.login-form {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.login-help {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.login-help h3 {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.login-help ol {
+  padding-left: 20px;
+  font-size: 13px;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.help-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Loading Screen */
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Add Buttons */
+.add-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.add-btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.add-btn.manual {
+  background: #1a1a2e;
+  color: white;
+}
+
+.add-btn.ai {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+/* Priority Dot */
+.priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.priority-dot.priority-high { background: #ef4444; }
+.priority-dot.priority-medium { background: #f59e0b; }
+.priority-dot.priority-low { background: #22c55e; }
