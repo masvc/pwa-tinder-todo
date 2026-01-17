@@ -10,7 +10,7 @@ import './App.css';
 type Page = 'home' | 'list' | 'add' | 'settings';
 
 function App() {
-  const { todos, addTodo, updateTodoStatus, skipTodo, refreshTodos } = useTodos();
+  const { todos, addTodo, updateTodoStatus, skipTodo, refreshTodos, setTodosFromSync } = useTodos();
   const { settings, updateSettings, hasApiKey } = useSettings();
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
@@ -23,7 +23,7 @@ function App() {
       case 'add':
         return <AddTodoPage onAdd={addTodo} onComplete={() => setCurrentPage('home')} apiKey={settings.claudeApiKey} hasApiKey={hasApiKey} />;
       case 'settings':
-        return <SettingsPage settings={settings} updateSettings={updateSettings} />;
+        return <SettingsPage settings={settings} updateSettings={updateSettings} todos={todos} onSyncFromSheet={setTodosFromSync} />;
       default:
         return <HomePage todos={todos} updateTodoStatus={updateTodoStatus} skipTodo={skipTodo} refreshTodos={refreshTodos} />;
     }

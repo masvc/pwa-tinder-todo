@@ -152,6 +152,8 @@ body {
   padding: 10px 12px;
   display: flex;
   justify-content: flex-end;
+  position: relative;
+  z-index: 1;
 }
 
 /* Card Main - タイトル表示エリア */
@@ -164,6 +166,8 @@ body {
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  z-index: 1;
 }
 
 .card-main h3 {
@@ -172,6 +176,7 @@ body {
   font-weight: 700;
   text-align: center;
   line-height: 1.4;
+  word-break: break-word;
 }
 
 /* Card Footer - 詳細表示エリア */
@@ -180,6 +185,8 @@ body {
   min-height: 80px;
   display: flex;
   align-items: flex-start;
+  position: relative;
+  z-index: 1;
 }
 
 .card-footer p {
@@ -335,6 +342,9 @@ body {
 .add-page {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 80px);
+  height: calc(100dvh - 80px);
+  overflow-y: auto;
 }
 
 .add-form {
@@ -399,9 +409,6 @@ body {
 
 /* Priority Badge */
 .priority-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
   padding: 4px 10px;
   border-radius: 12px;
   font-size: 11px;
@@ -524,6 +531,9 @@ body {
 .settings-page {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 80px);
+  height: calc(100dvh - 80px);
+  overflow-y: auto;
 }
 
 .settings-form {
@@ -757,4 +767,187 @@ body {
   font-size: 12px;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+/* Settings Label Row */
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.help-btn {
+  padding: 4px 10px;
+  background: #f3f4f6;
+  color: #6b7280;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.help-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #e5e7eb;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.setup-steps {
+  list-style: decimal;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.setup-steps li {
+  font-size: 14px;
+  color: #374151;
+}
+
+.setup-steps li strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #1a1a2e;
+}
+
+.setup-steps li p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.setup-steps li ul {
+  margin-top: 8px;
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.setup-steps li ul li {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.modal-note {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fef3c7;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #92400e;
+}
+
+/* GAS Buttons */
+.gas-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gas-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 12px;
+  background: #f9fafb;
+  color: #374151;
+  cursor: pointer;
+}
+
+.gas-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.gas-message {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.gas-message.error {
+  color: #dc2626;
+}
+
+.settings-status.connected {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.modal-body code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.copy-code-btn {
+  width: 100%;
+  padding: 12px;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
 }

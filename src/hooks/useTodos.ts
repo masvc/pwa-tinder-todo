@@ -6,7 +6,15 @@ const STORAGE_KEY = 'swipe-todos';
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
+    if (!stored) return [];
+    const parsed = JSON.parse(stored) as Todo[];
+    // Ensure all todos have required fields
+    return parsed.map(todo => ({
+      ...todo,
+      title: todo.title || '',
+      priority: todo.priority || 'medium',
+      status: todo.status || 'pending',
+    }));
   });
 
   useEffect(() => {
@@ -48,6 +56,15 @@ export const useTodos = () => {
     ));
   };
 
+  const setTodosFromSync = (newTodos: Todo[]) => {
+    setTodos(newTodos.map(todo => ({
+      ...todo,
+      title: todo.title || '',
+      priority: todo.priority || 'medium',
+      status: todo.status || 'pending',
+    })));
+  };
+
   return {
     todos,
     addTodo,
@@ -55,5 +72,6 @@ export const useTodos = () => {
     deleteTodo,
     skipTodo,
     refreshTodos,
+    setTodosFromSync,
   };
 };

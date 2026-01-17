@@ -69,7 +69,7 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
         </span>
       </div>
       <div className="card-main">
-        <h3>{todo.title}</h3>
+        <h3>{todo.title || '(タイトルなし)'}</h3>
       </div>
       <div className="card-footer">
         {todo.description ? (

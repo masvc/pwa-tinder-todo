@@ -5,6 +5,9 @@ export interface Settings {
   notionUpdatedAt: number | null;
   claudeApiKey: string;
   claudeUpdatedAt: number | null;
+  gasWebAppUrl: string;
+  gasUpdatedAt: number | null;
+  gasConnected: boolean;
 }
 
 const STORAGE_KEY = 'swipe-todo-settings';
@@ -14,6 +17,9 @@ const defaultSettings: Settings = {
   notionUpdatedAt: null,
   claudeApiKey: '',
   claudeUpdatedAt: null,
+  gasWebAppUrl: '',
+  gasUpdatedAt: null,
+  gasConnected: false,
 };
 
 export const useSettings = () => {
@@ -26,7 +32,12 @@ export const useSettings = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
   }, [settings]);
 
-  const updateSettings = (updates: { notionDbUrl?: string; claudeApiKey?: string }) => {
+  const updateSettings = (updates: {
+    notionDbUrl?: string;
+    claudeApiKey?: string;
+    gasWebAppUrl?: string;
+    gasConnected?: boolean;
+  }) => {
     const now = Date.now();
     setSettings((prev) => ({
       ...prev,
@@ -37,6 +48,13 @@ export const useSettings = () => {
       ...(updates.claudeApiKey !== undefined && {
         claudeApiKey: updates.claudeApiKey,
         claudeUpdatedAt: now,
+      }),
+      ...(updates.gasWebAppUrl !== undefined && {
+        gasWebAppUrl: updates.gasWebAppUrl,
+        gasUpdatedAt: now,
+      }),
+      ...(updates.gasConnected !== undefined && {
+        gasConnected: updates.gasConnected,
       }),
     }));
   };
