@@ -42,11 +42,18 @@ export const useTodos = () => {
     setTodos([...others, todoToSkip]);
   };
 
+  const refreshTodos = () => {
+    setTodos(todos.map(todo =>
+      todo.status === 'inProgress' ? { ...todo, status: 'pending' as TodoStatus } : todo
+    ));
+  };
+
   return {
     todos,
     addTodo,
     updateTodoStatus,
     deleteTodo,
     skipTodo,
+    refreshTodos,
   };
 };

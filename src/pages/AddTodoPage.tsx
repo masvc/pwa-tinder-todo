@@ -43,28 +43,23 @@ const AddTodoPage = ({ onAdd, onComplete }: AddTodoPageProps) => {
 
         <div className="form-group">
           <label>優先度</label>
-          <div className="priority-buttons">
-            <button
-              type="button"
-              className={`priority-btn priority-high ${priority === 'high' ? 'active' : ''}`}
-              onClick={() => setPriority('high')}
-            >
-              高
-            </button>
-            <button
-              type="button"
-              className={`priority-btn priority-medium ${priority === 'medium' ? 'active' : ''}`}
-              onClick={() => setPriority('medium')}
-            >
-              中
-            </button>
-            <button
-              type="button"
-              className={`priority-btn priority-low ${priority === 'low' ? 'active' : ''}`}
-              onClick={() => setPriority('low')}
-            >
-              低
-            </button>
+          <div className="priority-slider">
+            <input
+              type="range"
+              min="0"
+              max="2"
+              value={priority === 'high' ? 0 : priority === 'medium' ? 1 : 2}
+              onChange={(e) => {
+                const val = parseInt(e.target.value);
+                setPriority(val === 0 ? 'high' : val === 1 ? 'medium' : 'low');
+              }}
+              className={`priority-range priority-${priority}`}
+            />
+            <div className="priority-labels">
+              <span className={priority === 'high' ? 'active' : ''}>高</span>
+              <span className={priority === 'medium' ? 'active' : ''}>中</span>
+              <span className={priority === 'low' ? 'active' : ''}>低</span>
+            </div>
           </div>
         </div>
 

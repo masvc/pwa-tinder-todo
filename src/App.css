@@ -384,31 +384,92 @@ body {
 .background-card.priority-medium { border-color: #fcd34d; background: #fffbeb; }
 .background-card.priority-low { border-color: #86efac; background: #f0fdf4; }
 
-/* Priority Buttons */
-.priority-buttons {
+/* Priority Slider */
+.priority-slider {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.priority-btn {
-  flex: 1;
-  padding: 12px;
-  border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  background: white;
-  font-size: 14px;
-  font-weight: 600;
+.priority-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
   cursor: pointer;
-  transition: all 0.2s;
 }
 
-.priority-btn.priority-high { color: #ef4444; border-color: #fecaca; }
-.priority-btn.priority-medium { color: #f59e0b; border-color: #fde68a; }
-.priority-btn.priority-low { color: #22c55e; border-color: #bbf7d0; }
+.priority-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 
-.priority-btn.priority-high.active { background: #ef4444; color: white; border-color: #ef4444; }
-.priority-btn.priority-medium.active { background: #f59e0b; color: white; border-color: #f59e0b; }
-.priority-btn.priority-low.active { background: #22c55e; color: white; border-color: #22c55e; }
+.priority-range.priority-high { background: linear-gradient(to right, #ef4444, #fca5a5); }
+.priority-range.priority-medium { background: linear-gradient(to right, #ef4444, #f59e0b, #22c55e); }
+.priority-range.priority-low { background: linear-gradient(to right, #86efac, #22c55e); }
+
+.priority-range.priority-high::-webkit-slider-thumb { background: #ef4444; }
+.priority-range.priority-medium::-webkit-slider-thumb { background: #f59e0b; }
+.priority-range.priority-low::-webkit-slider-thumb { background: #22c55e; }
+
+.priority-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.priority-labels span.active {
+  font-weight: 600;
+}
+
+.priority-labels span:first-child.active { color: #ef4444; }
+.priority-labels span:nth-child(2).active { color: #f59e0b; }
+.priority-labels span:last-child.active { color: #22c55e; }
+
+/* Refresh Button */
+.refresh-btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.refresh-btn:hover {
+  background: #e5e7eb;
+}
+
+.refresh-icon {
+  font-size: 16px;
+  color: #1a1a2e;
+}
+
+.refresh-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.page-header {
+  position: relative;
+}
 
 /* Todo List Priority Indicator */
 .todo-item {

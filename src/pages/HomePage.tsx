@@ -5,10 +5,12 @@ interface HomePageProps {
   todos: Todo[];
   updateTodoStatus: (id: string, status: TodoStatus) => void;
   skipTodo: (id: string) => void;
+  refreshTodos: () => void;
 }
 
-const HomePage = ({ todos, updateTodoStatus, skipTodo }: HomePageProps) => {
+const HomePage = ({ todos, updateTodoStatus, skipTodo, refreshTodos }: HomePageProps) => {
   const pendingTodos = todos.filter(t => t.status === 'pending');
+  const inProgressCount = todos.filter(t => t.status === 'inProgress').length;
   const currentTodo = pendingTodos[0];
   const stackedTodos = pendingTodos.slice(1, 4);
   const remainingCount = pendingTodos.length;
@@ -31,6 +33,12 @@ const HomePage = ({ todos, updateTodoStatus, skipTodo }: HomePageProps) => {
            remainingCount === 1 ? 'ラスト 1 件' :
            `残り ${remainingCount} 件`}
         </p>
+        {inProgressCount > 0 && (
+          <button className="refresh-btn" onClick={refreshTodos} title="進行中を戻す">
+            <span className="refresh-icon">↻</span>
+            <span className="refresh-count">{inProgressCount}</span>
+          </button>
+        )}
       </header>
 
       <div className="card-container">
