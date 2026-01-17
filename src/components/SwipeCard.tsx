@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion';
 import { Todo, TodoStatus } from '../types';
 
 interface SwipeCardProps {
@@ -7,36 +7,43 @@ interface SwipeCardProps {
 }
 
 const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
+  const controls = useAnimation();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
-  const rotateX = useTransform(y, [-200, 200], [15, -15]);
-  const rotateY = useTransform(x, [-200, 200], [-15, 15]);
-  const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
 
-  const handleDragEnd = (_: any, info: any) => {
-    const threshold = 100;
-    
-    if (Math.abs(info.offset.x) > threshold || Math.abs(info.offset.y) > threshold) {
-      // 一番大きい方向を判定
-      const absX = Math.abs(info.offset.x);
-      const absY = Math.abs(info.offset.y);
-      
+  const rotateZ = useTransform(x, [-200, 200], [-15, 15]);
+
+  const handleDragEnd = async (_: any, info: any) => {
+    const threshold = 80;
+    const offsetX = info.offset.x;
+    const offsetY = info.offset.y;
+
+    if (Math.abs(offsetX) > threshold || Math.abs(offsetY) > threshold) {
+      const absX = Math.abs(offsetX);
+      const absY = Math.abs(offsetY);
+
+      let exitX = 0;
+      let exitY = 0;
+      let status: TodoStatus | 'skip';
+
       if (absX > absY) {
-        // 左右のスワイプ
-        if (info.offset.x < 0) {
-          onSwipe('skip'); // 左: スキップ
-        } else {
-          onSwipe('inProgress'); // 右: 進行中
-        }
+        exitX = offsetX > 0 ? 500 : -500;
+        status = offsetX < 0 ? 'skip' : 'inProgress';
       } else {
-        // 上下のスワイプ
-        if (info.offset.y < 0) {
-          onSwipe('completed'); // 上: 完了
-        } else {
-          onSwipe('archived'); // 下: アーカイブ
-        }
+        exitY = offsetY > 0 ? 500 : -500;
+        status = offsetY < 0 ? 'completed' : 'archived';
       }
+
+      await controls.start({
+        x: exitX,
+        y: exitY,
+        opacity: 0,
+        transition: { duration: 0.3 }
+      });
+
+      onSwipe(status);
+    } else {
+      controls.start({ x: 0, y: 0, transition: { type: 'spring', stiffness: 300 } });
     }
   };
 
@@ -48,16 +55,11 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
 
   return (
     <motion.div
-      style={{
-        x,
-        y,
-        rotateX,
-        rotateY,
-        opacity,
-      }}
+      style={{ x, y, rotateZ }}
+      animate={controls}
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      dragElastic={1}
+      dragElastic={0.8}
       onDragEnd={handleDragEnd}
       className={`swipe-card priority-${todo.priority}`}
     >
