@@ -103,14 +103,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  min-height: 350px;
+  min-height: 420px;
 }
 
 .card-stack {
   position: relative;
-  width: 100%;
-  max-width: 320px;
-  height: 280px;
+  width: 240px;
+  height: 360px;
 }
 
 .background-card {
@@ -120,7 +119,7 @@ body {
   width: 100%;
   height: 100%;
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 2px solid #d1d5db;
   pointer-events: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -131,36 +130,67 @@ body {
   width: 100%;
   height: 100%;
   background: white;
-  border-radius: 16px;
-  border: 2px solid #1a1a2e;
-  padding: 24px;
+  border-radius: 12px;
+  border: 3px solid;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   cursor: grab;
   user-select: none;
   z-index: 10;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   touch-action: none;
+  overflow: hidden;
 }
 
 .swipe-card:active {
   cursor: grabbing;
 }
 
-.swipe-card h3 {
-  font-size: 1.25rem;
-  color: #1a1a2e;
-  margin-bottom: 8px;
-  font-weight: 600;
+/* Card Header */
+.card-header {
+  padding: 10px 12px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.swipe-card p {
-  font-size: 0.9rem;
-  color: #6b7280;
+/* Card Main - タイトル表示エリア */
+.card-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.card-main h3 {
+  font-size: 1.25rem;
+  color: #1a1a2e;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Card Footer - 詳細表示エリア */
+.card-footer {
+  padding: 14px 16px;
+  min-height: 80px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.card-footer p {
+  font-size: 0.8rem;
+  color: #4b5563;
   line-height: 1.5;
+}
+
+.card-footer .no-desc {
+  color: #9ca3af;
+  font-style: italic;
 }
 
 .swipe-hints {
@@ -187,9 +217,8 @@ body {
 .hint-down { bottom: 12px; left: 50%; transform: translateX(-50%); }
 
 .empty-state {
-  width: 100%;
-  max-width: 320px;
-  height: 280px;
+  width: 240px;
+  height: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -476,11 +505,26 @@ body {
   position: relative;
 }
 
-/* Todo List Priority Indicator */
-.todo-item {
-  border-left: 4px solid transparent;
+/* Todo List Priority Text */
+.priority-text {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
-.todo-item.priority-high { border-left-color: #ef4444; }
-.todo-item.priority-medium { border-left-color: #f59e0b; }
-.todo-item.priority-low { border-left-color: #22c55e; }
+.priority-text.priority-high {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.priority-text.priority-medium {
+  color: #f59e0b;
+  background: #fffbeb;
+}
+
+.priority-text.priority-low {
+  color: #22c55e;
+  background: #f0fdf4;
+}

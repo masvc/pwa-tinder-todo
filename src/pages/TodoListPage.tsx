@@ -1,23 +1,25 @@
 import { Todo, TodoStatus } from '../types';
 import { useState } from 'react';
 
+type FilterType = TodoStatus | 'all' | 'active';
+
 interface TodoListPageProps {
   todos: Todo[];
   updateTodoStatus: (id: string, status: TodoStatus) => void;
 }
 
+const priorityLabel = { high: '高', medium: '中', low: '低' };
+
 const TodoListPage = ({ todos, updateTodoStatus }: TodoListPageProps) => {
-  const [filter, setFilter] = useState<TodoStatus | 'all'>('all');
+  const [filter, setFilter] = useState<FilterType>('active');
 
-  const filteredTodos = filter === 'all' ? todos : todos.filter(t => t.status === filter);
+  const filteredTodos = filter === 'all'
+    ? todos
+    : filter === 'active'
+    ? todos.filter(t => t.status === 'pending' || t.status === 'inProgress')
+    : todos.filter(t => t.status === filter);
 
-  const statusCounts = {
-    all: todos.length,
-    pending: todos.filter(t => t.status === 'pending').length,
-    inProgress: todos.filter(t => t.status === 'inProgress').length,
-    completed: todos.filter(t => t.status === 'completed').length,
-    archived: todos.filter(t => t.status === 'archived').length,
-  };
+  const activeCount = todos.filter(t => t.status === 'pending' || t.status === 'inProgress').length;
 
   return (
     <div className="list-page">
@@ -27,28 +29,28 @@ const TodoListPage = ({ todos, updateTodoStatus }: TodoListPageProps) => {
 
       <div className="status-tabs">
         <button
-          className={filter === 'all' ? 'active' : ''}
-          onClick={() => setFilter('all')}
+          className={filter === 'active' ? 'active' : ''}
+          onClick={() => setFilter('active')}
         >
-          全て ({statusCounts.all})
-        </button>
-        <button
-          className={filter === 'pending' ? 'active' : ''}
-          onClick={() => setFilter('pending')}
-        >
-          未実施 ({statusCounts.pending})
-        </button>
-        <button
-          className={filter === 'inProgress' ? 'active' : ''}
-          onClick={() => setFilter('inProgress')}
-        >
-          進行中 ({statusCounts.inProgress})
+          未完了 ({activeCount})
         </button>
         <button
           className={filter === 'completed' ? 'active' : ''}
           onClick={() => setFilter('completed')}
         >
-          完了 ({statusCounts.completed})
+          完了
+        </button>
+        <button
+          className={filter === 'archived' ? 'active' : ''}
+          onClick={() => setFilter('archived')}
+        >
+          アーカイブ
+        </button>
+        <button
+          className={filter === 'all' ? 'active' : ''}
+          onClick={() => setFilter('all')}
+        >
+          全て
         </button>
       </div>
 
@@ -57,7 +59,10 @@ const TodoListPage = ({ todos, updateTodoStatus }: TodoListPageProps) => {
           <div className="empty-message">タスクがありません</div>
         ) : (
           filteredTodos.map(todo => (
-            <div key={todo.id} className={`todo-item priority-${todo.priority}`}>
+            <div key={todo.id} className="todo-item">
+              <span className={`priority-text priority-${todo.priority}`}>
+                {priorityLabel[todo.priority]}
+              </span>
               <div className="todo-content">
                 <h3>{todo.title}</h3>
                 {todo.description && <p>{todo.description}</p>}

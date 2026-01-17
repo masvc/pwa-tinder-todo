@@ -61,11 +61,21 @@ const SwipeCard = ({ todo, onSwipe }: SwipeCardProps) => {
       onDragEnd={handleDragEnd}
       className={`swipe-card priority-${todo.priority}`}
     >
-      <span className={`priority-badge priority-${todo.priority}`}>
-        {priorityLabel[todo.priority]}
-      </span>
-      <h3>{todo.title}</h3>
-      {todo.description && <p>{todo.description}</p>}
+      <div className="card-header">
+        <span className={`priority-badge priority-${todo.priority}`}>
+          {priorityLabel[todo.priority]}
+        </span>
+      </div>
+      <div className="card-main">
+        <h3>{todo.title}</h3>
+      </div>
+      <div className="card-footer">
+        {todo.description ? (
+          <p>{todo.description}</p>
+        ) : (
+          <p className="no-desc">詳細なし</p>
+        )}
+      </div>
 
       <div className="swipe-hints">
         <span className="hint hint-left">スキップ</span>
